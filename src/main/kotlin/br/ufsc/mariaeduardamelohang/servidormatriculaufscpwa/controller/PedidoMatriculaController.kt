@@ -3,6 +3,7 @@ package br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.controller
 import br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.model.database.DiaSemana
 import br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.model.database.Horario
 import br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.model.database.Turma
+import br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.model.dto.LimitesCargaHorariaDTO
 import br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.model.dto.PedidoMatriculaDTO
 import br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.model.input.PedidoMatriculaInput
 import br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.service.PedidoMatriculaService
@@ -17,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class PedidoMatriculaController(
     private val service: PedidoMatriculaService,
-    private val registroPedidoMatriculaInputValidator: RegistroPedidoMatriculaInputValidator
+    private val registroPedidoMatriculaInputValidator: RegistroPedidoMatriculaInputValidator,
+    private val limitesCargaHorariaDTO: LimitesCargaHorariaDTO
 ) {
 
     @GetMapping("/pedidoMatricula")
@@ -44,5 +46,10 @@ class PedidoMatriculaController(
     @GetMapping("/diasSemana")
     fun diasSemana(): List<DiaSemana> {
         return service.buscarDiasSemana()
+    }
+
+    @GetMapping("/limitesCargaHoraria")
+    fun limitesCargaHoraria(): LimitesCargaHorariaDTO {
+        return limitesCargaHorariaDTO
     }
 }
