@@ -23,6 +23,7 @@ class FirebaseCloudMessagingInitializer(
     fun initialize() {
         try {
             val credentialsStream: InputStream = ByteArrayInputStream(credentials.toByteArray())
+            logger.info(credentials)
             val options = builder().setCredentials(fromStream(credentialsStream)).build()
 
             if (getApps().isEmpty()) {
