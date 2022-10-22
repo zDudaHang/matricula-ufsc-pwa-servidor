@@ -9,7 +9,7 @@ import java.util.UUID
 
 @Service
 class JWTService(
-    @Value("\${app.jwt.secret}") val secret: String
+    @Value("\${app.jwt-secret}") val secret: String
 ) {
 
     fun generateToken(matricula: UUID): String {

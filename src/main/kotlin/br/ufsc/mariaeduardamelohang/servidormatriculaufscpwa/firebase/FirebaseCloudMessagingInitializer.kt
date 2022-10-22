@@ -15,7 +15,7 @@ import javax.annotation.PostConstruct
 
 @Component
 class FirebaseCloudMessagingInitializer(
-    @Value("\${app.firebase-configuration.credentials}") private val credentials: String
+    @Value("\${app.firebase-credentials}") private val credentials: String
 ) {
     private val logger: Logger = LoggerFactory.getLogger(FirebaseCloudMessagingInitializer::class.java)
 
@@ -23,7 +23,6 @@ class FirebaseCloudMessagingInitializer(
     fun initialize() {
         try {
             val credentialsStream: InputStream = ByteArrayInputStream(credentials.toByteArray())
-            logger.info(credentials)
             val options = builder().setCredentials(fromStream(credentialsStream)).build()
 
             if (getApps().isEmpty()) {

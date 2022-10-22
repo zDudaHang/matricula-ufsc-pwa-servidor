@@ -19,13 +19,5 @@ spring:
 # = APLICAÇÃO
 # ===============================
 app:
-  jwt:
-    secret: ${JWT_SECRET}
-  firebase-configuration:
-    project-id: ${PROJECT_ID}
-    private-key-id: ${PRIVATE_KEY_ID}
-    private-key: ${PRIVATE_KEY}
-    client-email: ${CLIENT_EMAIL}
-    client-id: ${CLIENT_ID}
-    token-uri: ${TOKEN_URI}
-    credentials: ${CREDENTIALS}
+  jwt-secret: ${JWT_SECRET}
+  firebase-credentials: ${CREDENTIALS}
