@@ -28,3 +28,4 @@ app:
     client-email: ${CLIENT_EMAIL}
     client-id: ${CLIENT_ID}
     token-uri: ${TOKEN_URI}
+    credentials: ${CREDENTIALS}
