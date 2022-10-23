@@ -37,7 +37,7 @@ class RegistroPedidoMatriculaInputValidator(
                 .filter { it.value.size > 1 }
 
             if (horariosComConflito.isNotEmpty()) {
-                error.fieldError(PedidoMatriculaInput::turmas, "Conflito(s) de horários encontrado(s)")
+                error.fieldError(PedidoMatriculaInput::turmas, "Conflito(s) de horário encontrado(s)")
             } else {
                 val cargaHorariaTotal = turmas.sumOf { it.disciplina.cargaHoraria }
                 if (cargaHorariaTotal < cargaHorariaMinima) {
