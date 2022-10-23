@@ -21,6 +21,7 @@ spring:
 app:
   jwt-secret: ${JWT_SECRET}
   firebase-credentials: ${CREDENTIALS}
+  allowed-origin: ${ALLOWED_ORIGIN}
   matricula:
     carga-horaria:
       min: ${CARGA_HORARIA_MINIMA}

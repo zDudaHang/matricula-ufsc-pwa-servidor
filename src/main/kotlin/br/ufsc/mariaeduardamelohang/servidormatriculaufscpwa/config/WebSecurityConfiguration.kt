@@ -2,6 +2,7 @@ package br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.config
 
 import br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.security.jwt.JWTFilter
 import br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.service.AlunoService
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -19,7 +20,8 @@ import org.springframework.web.filter.CorsFilter
 @EnableWebSecurity
 class WebSecurityConfiguration(
     private val alunoService: AlunoService,
-    private val jwtFilter: JWTFilter
+    private val jwtFilter: JWTFilter,
+    @Value("\${app.allowed-origin}") private val allowedOrigin: String
 ) {
 
     @Bean
@@ -50,7 +52,7 @@ class WebSecurityConfiguration(
     @Bean
     fun corsFilter(): CorsFilter {
         val config = CorsConfiguration()
-        config.addAllowedOrigin("*")
+        config.addAllowedOrigin(allowedOrigin)
         config.addAllowedHeader("*")
         config.addAllowedMethod("*")
         val source = UrlBasedCorsConfigurationSource()
