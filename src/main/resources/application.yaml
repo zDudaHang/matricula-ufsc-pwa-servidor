@@ -1,12 +1,6 @@
 spring:
   application:
     name: matricula-ufsc-app
-  datasource:
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/matricula-ufsc-database
-    initialization-mode: always
   # ===============================
   # = BANCO DE DADOS
   # ===============================
