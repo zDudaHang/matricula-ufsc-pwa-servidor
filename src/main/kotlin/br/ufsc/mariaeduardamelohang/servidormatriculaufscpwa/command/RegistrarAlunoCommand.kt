@@ -5,7 +5,6 @@ import br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.model.input.Registr
 import org.springframework.stereotype.Repository
 import javax.persistence.EntityManager
 import javax.transaction.Transactional
-import kotlin.math.roundToInt
 import kotlin.random.Random
 
 @Repository
@@ -18,7 +17,7 @@ class RegistrarAlunoCommand(
         val aluno = Aluno()
         aluno.nomeUsuario = input.nomeUsuario
         aluno.senha = input.senha
-        aluno.iaa = (Random.nextFloat() * 10).roundToInt()
+        aluno.iaa = Random.nextInt(0,9)
 
         em.persist(aluno)
 
