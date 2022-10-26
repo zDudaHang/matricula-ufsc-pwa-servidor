@@ -5,10 +5,10 @@ spring:
   # = BANCO DE DADOS
   # ===============================
   jpa:
-    show-sql: false
-    generate-ddl: true
+    show-sql: ${SHOW_SQL}
+    generate-ddl: ${GENERATE_DDL}
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: ${DDL_AUTO}
     properties:
       hibernate:
         jdbc:
