@@ -37,7 +37,7 @@ BEGIN
             ELSE false
         END,
 	    POSICAO = POSICAO - 1
-	WHERE OLD.TURMA_CODIGO = TURMA_CODIGO;
+	WHERE OLD.TURMA_CODIGO = TURMA_CODIGO AND POSICAO > OLD.POSICAO;
 	RETURN OLD;
 END;
 $atualizar_posicoes_saida_aluno$ LANGUAGE plpgsql;
