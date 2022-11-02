@@ -5,12 +5,9 @@ import br.ufsc.bridge.platform.validation.form.errors.FormErrorImpl
 import br.ufsc.bridge.platform.validation.rules.Rules.required
 import br.ufsc.mariaeduardamelohang.servidormatriculaufscpwa.model.input.LoginInput
 import org.springframework.stereotype.Component
-import javax.persistence.EntityManager
 
 @Component
-class LoginInputValidator(
-    private val em: EntityManager
-) {
+class LoginInputValidator {
     fun validate(input: LoginInput): FormError<LoginInput> {
         val error = FormErrorImpl(input)
 

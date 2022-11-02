@@ -17,8 +17,8 @@ class RegistrarAlunoInputValidator(
         error.check(RegistrarAlunoInput::nomeUsuario, required)
         error.check(RegistrarAlunoInput::senha, required)
 
-        if (error.isValid && input.nomeUsuario != null) {
-            val aluno = buscarAlunoByUsernameQuery.execute(input.nomeUsuario)
+        if (error.isValid) {
+            val aluno = buscarAlunoByUsernameQuery.execute(input.nomeUsuario!!)
             if (aluno != null) {
                 error.fieldError(
                     RegistrarAlunoInput::nomeUsuario,

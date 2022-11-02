@@ -14,7 +14,7 @@ import javax.persistence.EntityManager
 @Component
 class RegistroPedidoMatriculaInputValidator(
     private val em: EntityManager,
-    @Value("\${app.matricula.carga-horaria.min}") private val cargaHorariaMinima : Int,
+    @Value("\${app.matricula.carga-horaria.min}") private val cargaHorariaMinima: Int,
     @Value("\${app.matricula.carga-horaria.max}") private val cargaHorariaMaxima: Int
 ) {
 
@@ -27,23 +27,33 @@ class RegistroPedidoMatriculaInputValidator(
         if (error.isValid) {
             val turmas: MutableList<Turma> = mutableListOf()
             input.turmas.forEach {
-                turmas.add(em.find(Turma::class.java, it))
+                if (error.isValid) {
+                    if (it == null) {
+                        error.fieldError(PedidoMatriculaInput::turmas, "Turma com código $it não encontrada")
+                    } else {
+                        val turma = em.find(Turma::class.java, it)
+                        if (turma == null) error.fieldError(PedidoMatriculaInput::turmas, "Turma com código $it não encontrada")
+                        else turmas.add(turma)
+                    }
+                }
             }
 
-            val horariosComConflito = turmas
-                .map { it.horarios }
-                .flatten()
-                .groupBy { ConflitoKey(it.id.diaSemana.id, it.id.horario.id) }
-                .filter { it.value.size > 1 }
+            if (error.isValid) {
+                val horariosComConflito = turmas
+                    .map { it.horarios }
+                    .flatten()
+                    .groupBy { ConflitoKey(it.id.diaSemana.id, it.id.horario.id) }
+                    .filter { it.value.size > 1 }
 
-            if (horariosComConflito.isNotEmpty()) {
-                error.fieldError(PedidoMatriculaInput::turmas, "Conflito(s) de horário encontrado(s)")
-            } else {
-                val cargaHorariaTotal = turmas.sumOf { it.disciplina.cargaHoraria }
-                if (cargaHorariaTotal < cargaHorariaMinima) {
-                    error.fieldError(PedidoMatriculaInput::turmas, "A carga horária mínima é de $cargaHorariaMinima H/A")
-                } else if (cargaHorariaTotal > cargaHorariaMaxima) {
-                    error.fieldError(PedidoMatriculaInput::turmas, "A carga horária máxima é de $cargaHorariaMaxima H/A")
+                if (horariosComConflito.isNotEmpty()) {
+                    error.fieldError(PedidoMatriculaInput::turmas, "Conflito(s) de horário encontrado(s)")
+                } else {
+                    val cargaHorariaTotal = turmas.sumOf { it.disciplina.cargaHoraria }
+                    if (cargaHorariaTotal < cargaHorariaMinima) {
+                        error.fieldError(PedidoMatriculaInput::turmas, "A carga horária mínima é de $cargaHorariaMinima H/A")
+                    } else if (cargaHorariaTotal > cargaHorariaMaxima) {
+                        error.fieldError(PedidoMatriculaInput::turmas, "A carga horária máxima é de $cargaHorariaMaxima H/A")
+                    }
                 }
             }
         }

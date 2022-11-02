@@ -42,11 +42,13 @@ BEGIN
 END;
 $atualizar_posicoes_saida_aluno$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS atualizar_posicoes_entrada_aluno ON TB_PEDIDO_MATRICULA;
 CREATE TRIGGER atualizar_posicoes_entrada_aluno
 AFTER INSERT ON TB_PEDIDO_MATRICULA
 FOR EACH ROW
 EXECUTE PROCEDURE atualizar_posicoes_entrada_aluno();
 
+DROP TRIGGER IF EXISTS atualizar_posicoes_saida_aluno ON TB_PEDIDO_MATRICULA;
 CREATE TRIGGER atualizar_posicoes_saida_aluno
 AFTER DELETE ON TB_PEDIDO_MATRICULA
 FOR EACH ROW

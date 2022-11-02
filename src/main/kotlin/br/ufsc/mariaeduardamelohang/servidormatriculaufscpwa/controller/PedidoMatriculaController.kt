@@ -30,7 +30,7 @@ class PedidoMatriculaController(
     @PostMapping("/registrarPedidoMatricula", consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun registrarPedidoMatricula(@RequestBody input: PedidoMatriculaInput): List<Turma> {
         registroPedidoMatriculaInputValidator.validate(input).throwIfInvalid()
-        return service.registrarPedidoMatricula(input.turmas)
+        return service.registrarPedidoMatricula(input.turmas.filterNotNull())
     }
 
     @GetMapping("/turmas")
