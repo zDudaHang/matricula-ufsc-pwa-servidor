@@ -14,3 +14,7 @@ docker-compose up -d database
 # Subindo o servidor:
 mvn spring-boot:run
 ```
+
+TODO @zDudaHang:
+- Explicar a arq. (O qué um Command / Query / Input / Validator / etc)
+- Explicitar as variáveis de ambiente que precisam ser definidas
