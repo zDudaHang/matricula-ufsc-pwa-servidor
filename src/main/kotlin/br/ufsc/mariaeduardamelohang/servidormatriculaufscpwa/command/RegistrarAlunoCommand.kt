@@ -17,7 +17,7 @@ class RegistrarAlunoCommand(
         val aluno = Aluno()
         aluno.nomeUsuario = input.nomeUsuario
         aluno.senha = input.senha
-        aluno.iaa = Random.nextInt(0,9)
+        aluno.iaa = Random.nextInt(1,9)
 
         em.persist(aluno)
 
