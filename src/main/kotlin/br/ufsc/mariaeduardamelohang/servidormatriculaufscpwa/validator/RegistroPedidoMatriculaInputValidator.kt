@@ -50,9 +50,9 @@ class RegistroPedidoMatriculaInputValidator(
                 } else {
                     val cargaHorariaTotal = turmas.sumOf { it.disciplina.cargaHoraria }
                     if (cargaHorariaTotal < cargaHorariaMinima) {
-                        error.fieldError(PedidoMatriculaInput::turmas, "A carga horária mínima é de $cargaHorariaMinima H/A")
+                        error.fieldError(PedidoMatriculaInput::turmas, "A carga horária mínima é de $cargaHorariaMinima H/A e seu pedido está com $cargaHorariaTotal")
                     } else if (cargaHorariaTotal > cargaHorariaMaxima) {
-                        error.fieldError(PedidoMatriculaInput::turmas, "A carga horária máxima é de $cargaHorariaMaxima H/A")
+                        error.fieldError(PedidoMatriculaInput::turmas, "A carga horária máxima é de $cargaHorariaMaxima H/A e seu pedido está com $cargaHorariaTotal")
                     }
                 }
             }
